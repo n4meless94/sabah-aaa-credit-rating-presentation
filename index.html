@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sabah Retains Its AAA Credit Rating</title>
+<style>
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#000}#stage{width:100vw;height:100vh;display:flex;align-items:center;justify-content:center}img{max-width:100vw;max-height:100vh;width:100%;height:100%;object-fit:contain;display:none}img.active{display:block}#status{position:fixed;right:18px;bottom:12px;color:#aaa;background:#0008;font:16px Arial;padding:6px 10px;border-radius:4px;opacity:0;transition:opacity .4s}body:hover #status{opacity:1}
+</style>
+</head>
+<body>
+<div id="stage"></div><div id="status"></div>
+<script>
+const slides=["slide-1.jpg","slide-2.jpg","slide-3.jpg","slide-4.jpg","slide-5.jpg","slide-6.jpg"];
+const stage=document.getElementById('stage'),status=document.getElementById('status');
+let index=0;
+slides.forEach((src,i)=>{const img=new Image();img.src=src;img.alt='Slide '+(i+1);img.className=i===0?'active':'';stage.appendChild(img)});
+const show=()=>{const imgs=[...stage.children];imgs.forEach((img,i)=>img.classList.toggle('active',i===index));status.textContent=(index+1)+' / '+slides.length};
+show();
+setInterval(()=>{index=(index+1)%slides.length;show()},8000);
+</script>
+</body></html>
