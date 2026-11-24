@@ -43,14 +43,15 @@ window.CREDIT_DATA = {
       { id: 'stress', label: 'Illustrative stress', below: 65, classification: 'illustrative', colour: 'coral' }
     ],
     insights: {
-      forecast: 'MARC expects higher Brent prices to support energy-linked revenue.',
+      actual: 'Sabah maintained its AAA rating as Brent averaged USD 68 per barrel in 2025.',
+      forecast: 'MARC forecasts a 32–40% rebound from 2025, supporting energy-linked revenue.',
       stress: 'Over two-thirds of state revenue is tied to commodities, exposing collections to a sustained downturn.'
     }
   }
 };
 
 window.TV_SCENES = [
-  { id: 'overview', label: 'Executive Overview', focus: ['funds-panel', 'revenue-panel', 'grant-panel'], brent: 'forecast',
+  { id: 'overview', label: 'Executive Overview', focus: ['rating-panel'], brent: 'forecast',
     heading: 'AAA affirmed with a stable outlook',
     insight: 'Liquidity, natural resource income and federal support underpin Sabah’s rating.' },
   { id: 'fiscal', label: 'Fiscal Resilience', focus: ['funds-panel', 'revenue-panel'], brent: 'actual',

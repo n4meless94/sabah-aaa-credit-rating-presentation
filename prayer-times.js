@@ -14,7 +14,6 @@
     ['maghrib', 'Maghrib', 'sunset', true, true],
     ['isha', 'Isyak', 'moon', true, true]
   ];
-  const obligatory = fields.filter((entry) => entry[3]);
   const months = ['Jan', 'Feb', 'Mar Mac', 'Apr', 'May Mei', 'Jun', 'Jul', 'Aug Ogo Ogos', 'Sep', 'Oct Okt', 'Nov', 'Dec Dis'];
   const hijriMonths = ['Muharam', 'Safar', 'Rabiulawal', 'Rabiulakhir', 'Jamadilawal', 'Jamadilakhir', 'Rejab', 'Syaaban', 'Ramadan', 'Syawal', 'Zulkaedah', 'Zulhijah'];
   const icons = {
@@ -31,6 +30,7 @@
   const nextName = el('next-name');
   const nextTime = el('next-time');
   const arrival = el('prayer-arrival');
+  const obligatory = fields.filter((entry) => entry[3]);
   let schedule = new Map();
   let fetchedAt = 0;
   let displayedDate = '';
@@ -38,6 +38,7 @@
   let retryAt = 0;
   let retryMs = 30000;
   let loading = false;
+  let started = false;
   let cachedOnly = false;
   let arrivalUntil = 0;
 
@@ -47,7 +48,7 @@
     item.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="' + icons[icon] +
       '"></path></svg><span class="name"></span><time class="time">—</time>';
     item.querySelector('.name').textContent = name;
-    if (key === 'syuruk') item.setAttribute('aria-label', 'Syuruk, sunrise');
+    if (key === 'syuruk') item.querySelector('.name').title = 'Sunrise reference';
     el('prayer-list').appendChild(item);
     return { key, item, time: item.querySelector('time') };
   });
@@ -58,7 +59,9 @@
   statusLine.textContent = 'JAKIM e-Solat · ' + config.zone;
 
   function normalise(payload) {
-    if (payload.zone !== config.zone || !Array.isArray(payload.prayerTime)) throw new Error('Invalid JAKIM response');
+    if (!payload || payload.zone !== config.zone || payload.periodType !== 'year' || !Array.isArray(payload.prayerTime)) {
+      throw new Error('Invalid JAKIM response');
+    }
     const days = new Map();
     for (const row of payload.prayerTime) {
       const date = /^(\d{2})-([A-Za-z]{3,4})-(\d{4})$/.exec(row.date);
@@ -83,7 +86,10 @@
       days.set(iso, { start, times, hijri: Number(hijri[3]) + ' ' + hijriMonths[Number(hijri[2]) - 1] + ' ' + hijri[1] + ' H' });
     }
     const dates = [...days.values()].map((day) => day.start).sort((a, b) => a - b);
-    if (dates.length < 365 || dates.some((date, i) => i && date - dates[i - 1] !== dayMs)) {
+    const first = isoDay(dates[0] || 0);
+    const year = Number(first.slice(0, 4));
+    const yearLength = (Date.UTC(year + 1, 0, 1) - Date.UTC(year, 0, 1)) / dayMs;
+    if (first.slice(5) !== '01-01' || dates.length !== yearLength || dates.some((date, i) => i && date - dates[i - 1] !== dayMs)) {
       throw new Error('Incomplete annual timetable');
     }
     return days;
@@ -111,7 +117,8 @@
       const payload = await response.json();
       const days = normalise(payload);
       if (!days.has(isoDay(Date.now()))) throw new Error('JAKIM timetable excludes today');
-      schedule = days;
+      // Preserve adjacent dates across a year change for the post-Isyak interval.
+      schedule = new Map([...schedule, ...days].filter(([, day]) => Math.abs(day.start - Date.now()) <= 367 * dayMs));
       fetchedAt = Date.now();
       cachedOnly = false;
       retryMs = 30000;
@@ -132,7 +139,10 @@
     arrivalUntil = now + 15000;
     arrival.textContent = 'Masuk waktu ' + name + ' · ' + value.time.slice(0, 5) + ' · ' + config.location;
     arrival.hidden = false;
-    if (config.azanUrl) new Audio(config.azanUrl).play().catch(() => {});
+    if (config.azanUrl) {
+      const playback = new Audio(config.azanUrl).play();
+      if (playback) playback.catch(() => {});
+    }
   }
 
   function tick(now, fromRefresh) {
@@ -143,7 +153,7 @@
     const rollover = displayedDate !== date;
     displayedDate = date;
     const nextToday = today && obligatory.find(([key]) => today.times[key].at > now);
-    const nextField = nextToday || (today && tomorrow ? obligatory[0] : null);
+    const nextField = nextToday || (tomorrow ? obligatory[0] : null);
     const next = nextField && (nextToday ? today : tomorrow).times[nextField[0]];
 
     for (const entry of entries) {
@@ -185,11 +195,13 @@
   }
 
   window.PrayerService = {
-    start: () => {
+    start() {
+      if (started) return;
+      started = true;
       tick(Date.now(), true);
       refresh();
       setInterval(() => tick(Date.now(), false), 1000);
-    },
-    tick
+      addEventListener('online', refresh);
+    }
   };
 })();

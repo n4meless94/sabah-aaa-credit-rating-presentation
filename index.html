@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
-  <meta name="display-release" content="2026-11-24.1">
+  <meta name="display-release" content="2026-11-24.2">
   <title>Sabah Credit Rating | GCEO Executive Intelligence Display</title>
-  <link rel="stylesheet" href="display.css?v=2026-11-24.1">
-  <script src="display-config.js?v=2026-11-24.1" defer></script>
-  <script src="credit-data.js?v=2026-11-24.1" defer></script>
-  <script src="prayer-times.js?v=2026-11-24.1" defer></script>
-  <script src="display.js?v=2026-11-24.1" defer></script>
-  <script src="visuals.js?v=2026-11-24.1" defer></script>
+  <link rel="stylesheet" href="display.css?v=2026-11-24.2">
+  <script src="display-config.js?v=2026-11-24.2" defer></script>
+  <script src="credit-data.js?v=2026-11-24.2" defer></script>
+  <script src="prayer-times.js?v=2026-11-24.2" defer></script>
+  <script src="display.js?v=2026-11-24.2" defer></script>
+  <script src="visuals.js?v=2026-11-24.2" defer></script>
 </head>
 <body>
   <div class="viewport">
@@ -28,17 +28,17 @@
         </div>
         <div class="scene-indicator">
           <p id="scene-label" class="scene-label">Executive Overview</p>
-          <div id="prayer-arrival" class="arrival" role="status" hidden></div>
+          <p id="prayer-arrival" class="arrival" role="status" hidden></p>
         </div>
         <div class="clock" aria-label="Kota Kinabalu clock">
           <div><time id="clock-time">--:--</time><span id="clock-seconds"></span><span id="clock-period"></span></div>
           <p id="clock-date">Malaysia Time</p>
-          <p class="meta">Kota Kinabalu · MYT</p>
+          <p class="meta">Kota Kinabalu · Malaysia Time (MYT)</p>
         </div>
       </header>
 
       <section class="financial" aria-label="Sabah credit rating and financial indicators">
-        <article class="rating surface">
+        <article id="rating-panel" class="rating surface">
           <p class="eyebrow">Sub-sovereign rating</p>
           <div id="rating-emblem" class="emblem">
             <div class="fallback emblem-rings" aria-hidden="true"></div>
@@ -61,12 +61,14 @@
               <div class="metric-line"><strong id="funds-value" class="number positive">RM7.6bn</strong><span class="meta">2024<br>2nd after Sarawak</span></div>
               <p class="metric-caption">Gross debt coverage</p>
               <div id="debt-chart" class="comparison"></div>
+              <p class="meta">Coverage rose 118% from 2020 to 2024</p>
             </article>
             <article id="revenue-panel" class="surface metric">
               <h2>State Revenue</h2>
               <div class="metric-line"><strong id="revenue-value" class="number">RM6.8bn</strong><span class="meta">2024 · 6% of GDP<br>2nd in Malaysia</span></div>
               <p class="metric-caption">Surplus in <strong id="surplus-count">9 of 10 years</strong></p>
-              <ol id="fiscal-years" class="fiscal-years" aria-label="Fiscal balance by year"></ol>
+              <ol id="fiscal-years" class="fiscal-years" aria-label="Fiscal balance by year, 2015 to 2024"></ol>
+              <p class="fiscal-key"><span>Surplus</span><span>Deficit</span></p>
               <p class="meta">Surplus: 0.4% of GDP in 2024, 1.0% in 2023</p>
             </article>
             <article id="grant-panel" class="surface metric">
@@ -90,21 +92,21 @@
               <div id="brent-chart" class="brent-chart" aria-label="Brent price comparison"></div>
               <div id="brent-legend" class="brent-legend"></div>
               <p id="brent-insight" class="support"></p>
-              <p class="risk-note">Key risks: prolonged commodity weakness and weaker federal cooperation.</p>
-              <p class="meta">MA63: 25 of 222 MPs · RM50m project cap · 40% net revenue talks</p>
+              <p class="risk-note">Downside risks include prolonged commodity weakness and weaker federal cooperation.</p>
+              <p class="meta">MA63 · 25 of 222 MPs · RM50m project cap · Talks on 40% net revenue entitlement</p>
             </article>
           </div>
         </div>
       </section>
 
       <section class="insight" aria-label="Executive insight">
-        <div class="insight-copy">
+        <div id="insight-copy" class="insight-copy">
           <p id="insight-heading">Executive insight</p>
           <p id="insight-text">Sabah’s AAA rating remained stable.</p>
         </div>
         <div class="insight-source">
           <p>MARC Ratings · SDC Blueprint 2.0</p>
-          <p>Financial reference: 20 November 2026</p>
+          <p>Financial reference · 20 November 2026</p>
           <div class="progress-track" aria-hidden="true"><div id="scene-progress"></div></div>
         </div>
       </section>
@@ -121,7 +123,6 @@
           <p id="next-name">Timetable loading</p>
           <time id="next-time"></time>
         </div>
-
       </section>
     </main>
   </div>
