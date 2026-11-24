@@ -1,21 +1,1510 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en-GB">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Sabah Retains Its AAA Credit Rating</title>
-<style>
-html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#000}#stage{width:100vw;height:100vh;display:flex;align-items:center;justify-content:center}img{max-width:100vw;max-height:100vh;width:100%;height:100%;object-fit:contain;display:none}img.active{display:block}#status{position:fixed;right:18px;bottom:12px;color:#aaa;background:#0008;font:16px Arial;padding:6px 10px;border-radius:4px;opacity:0;transition:opacity .4s}body:hover #status{opacity:1}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="artifact-type" content="dashboard">
+  <meta name="design-style" content="aurora">
+  <title>Sabah Sub-Sovereign Credit Rating — GCEO Executive Display</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: dark;
+
+      /* Page and surfaces: deep oceanic slate steps */
+      --background: #0c1214;
+      --surface-container-low: #111a1e;
+      --surface-container: #152024;
+      --surface-container-high: #1c2a30;
+
+      /* Text */
+      --on-surface: #edf3f5;
+      --on-surface-variant: #94a8b0;
+
+      /* Borders */
+      --outline: #38515c;
+      --outline-variant: #213138;
+
+      /* Accents */
+      --primary: #63c7d6;
+      --on-primary: #081214;
+      --primary-container: #163840;
+      --on-primary-container: #c7f0f7;
+      --secondary: #5d7882;
+      --tertiary: #87d69b;
+      --error: #f27474;
+      --on-error: #1a0606;
+
+      /* Data series */
+      --data-1: #63c7d6;
+      --data-2: #87d69b;
+      --data-3: #e8b954;
+      --data-4: #f08c70;
+      --data-context: #415861;
+
+      /* Fonts */
+      --font-headline: 'Instrument Sans', sans-serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      --font-label: 'Geist Mono', monospace;
+
+      /* Shape */
+      --rounded: 0.5rem;
+      --rounded-lg: 0.75rem;
+      --rounded-full: 9999px;
+
+      /* Style effects */
+      --hairline: 1px solid var(--outline-variant);
+      --hairline-strong: 1px solid var(--outline);
+      --panel-gradient: linear-gradient(180deg, #162226 0%, #111a1e 100%);
+      --panel-gradient-hero: linear-gradient(155deg, #182a30 0%, #111a1e 72%);
+      --heading-tracking: -0.025em;
+      --label-tracking: 0.06em;
+      --sage-tint: color-mix(in srgb, var(--tertiary) 14%, transparent);
+      --sage-border: color-mix(in srgb, var(--tertiary) 40%, transparent);
+      --cyan-tint: color-mix(in srgb, var(--primary) 14%, transparent);
+      --cyan-border: color-mix(in srgb, var(--primary) 42%, transparent);
+      --amber-tint: color-mix(in srgb, var(--data-3) 14%, transparent);
+      --amber-border: color-mix(in srgb, var(--data-3) 42%, transparent);
+      --coral-tint: color-mix(in srgb, var(--data-4) 14%, transparent);
+      --coral-border: color-mix(in srgb, var(--data-4) 40%, transparent);
+      --glow-cyan: 0 0 28px color-mix(in srgb, var(--primary) 26%, transparent);
+      --glow-sage: 0 0 24px color-mix(in srgb, var(--tertiary) 24%, transparent);
+      --glow-amber: 0 0 24px color-mix(in srgb, var(--data-3) 24%, transparent);
+      --ambient-radial: radial-gradient(circle at 18% 12%, color-mix(in srgb, var(--primary) 9%, transparent) 0%, transparent 52%),
+                        radial-gradient(circle at 86% 8%, color-mix(in srgb, var(--tertiary) 7%, transparent) 0%, transparent 45%);
+
+      /* Semantic */
+      --positive: var(--tertiary);
+      --warning: var(--data-3);
+      --focus: var(--primary);
+
+      /* TV Executive Dashboard Type Scale */
+      --rating-size: clamp(3.75rem, 2.8rem + 3.2vw, 5.75rem);
+      --kpi-size: clamp(2.5rem, 1.85rem + 2.1vw, 3.85rem);
+      --display-size: clamp(1.85rem, 1.45rem + 1.3vw, 2.65rem);
+      --headline-size: clamp(1.25rem, 1.05rem + 0.65vw, 1.65rem);
+      --subhead-size: clamp(1.0625rem, 0.98rem + 0.35vw, 1.25rem);
+      --body-size: clamp(0.95rem, 0.9rem + 0.2vw, 1.0625rem);
+      --label-size: clamp(0.75rem, 0.72rem + 0.14vw, 0.875rem);
+
+      /* Spacing scale */
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2.25rem;
+      --space-2xl: 3.5rem;
+
+      /* Motion */
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+      --dur-micro: 140ms;
+      --dur-short: 260ms;
+      --dur-long: 650ms;
+    }
+
+    /* Base reset */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      overflow-x: clip;
+      margin: 0;
+      padding: 0;
+      background-color: var(--background);
+      color: var(--on-surface);
+      font-family: var(--font-body);
+      font-size: var(--body-size);
+      line-height: 1.45;
+      -webkit-font-smoothing: antialiased;
+    }
+    body {
+      background-image: var(--ambient-radial);
+      min-height: 100vh;
+    }
+    header { position: static !important; }
+
+    :focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    .tv-shell {
+      display: grid;
+      gap: var(--space-lg);
+      padding: var(--space-lg) var(--space-xl);
+      max-width: 1720px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+    .tv-shell * { min-width: 0; }
+
+    /* Top Executive Control Bar */
+    .control-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-md);
+      padding-bottom: var(--space-md);
+      border-bottom: var(--hairline-strong);
+    }
+
+    .title-block {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .page-title {
+      margin: 0;
+      font-family: var(--font-headline);
+      font-size: var(--display-size);
+      font-weight: 700;
+      letter-spacing: var(--heading-tracking);
+      line-height: 1.08;
+      color: var(--on-surface);
+    }
+
+    .page-subtitle {
+      margin: 0;
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      letter-spacing: var(--label-tracking);
+      text-transform: uppercase;
+      color: var(--on-surface-variant);
+    }
+
+    .control-cluster {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .well-group {
+      display: inline-flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-xs);
+      background: var(--surface-container-low);
+      border: var(--hairline);
+      border-radius: var(--rounded);
+      padding: var(--space-xs);
+    }
+
+    .ctrl-btn {
+      min-height: 44px;
+      padding: var(--space-sm) var(--space-md);
+      border-radius: calc(var(--rounded) - 2px);
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--on-surface-variant);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 500;
+      letter-spacing: var(--label-tracking);
+      text-transform: uppercase;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      transition: background-color var(--dur-micro) var(--ease-out),
+                  color var(--dur-micro) var(--ease-out),
+                  box-shadow var(--dur-micro) var(--ease-out);
+    }
+
+    .ctrl-btn:hover {
+      background: var(--surface-container-high);
+      color: var(--on-surface);
+    }
+
+    .ctrl-btn[aria-pressed="true"] {
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+      box-shadow: inset 0 0 0 1px var(--cyan-border);
+    }
+
+    .ctrl-btn.stress-btn[aria-pressed="true"] {
+      background: var(--coral-tint);
+      color: var(--data-4);
+      box-shadow: inset 0 0 0 1px var(--coral-border);
+    }
+
+    .clock-readout {
+      min-height: 44px;
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--rounded);
+      background: var(--background);
+      border: var(--hairline);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-variant-numeric: tabular-nums;
+      letter-spacing: var(--label-tracking);
+      color: var(--primary);
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    /* Main TV Landscape Grids */
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 5fr) minmax(0, 3.5fr) minmax(0, 3.5fr);
+      gap: var(--space-lg);
+    }
+
+    .pillar-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 5fr) minmax(0, 4fr) minmax(0, 3fr);
+      gap: var(--space-lg);
+    }
+
+    /* Panel Surface */
+    .panel {
+      container-type: inline-size;
+      background: var(--panel-gradient);
+      border: var(--hairline);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: var(--space-md);
+      position: relative;
+      transition: box-shadow var(--dur-short) var(--ease-out),
+                  opacity var(--dur-short) var(--ease-out),
+                  transform var(--dur-short) var(--ease-out);
+    }
+
+    .panel-hero {
+      background: var(--panel-gradient-hero);
+      box-shadow: var(--glow-cyan), inset 0 1px 0 color-mix(in srgb, var(--primary) 22%, transparent);
+    }
+
+    .panel.is-dimmed {
+      opacity: 0.38;
+    }
+
+    .panel.is-spotlight {
+      box-shadow: var(--glow-cyan), inset 0 0 0 1px var(--primary);
+      transform: translateY(-2px);
+    }
+
+    .panel-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+    }
+
+    .data-label {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 500;
+      letter-spacing: var(--label-tracking);
+      text-transform: uppercase;
+      color: var(--on-surface-variant);
+      margin: 0;
+    }
+
+    /* Status Badges */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      padding: var(--space-xs) var(--space-sm);
+      border-radius: var(--rounded);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      letter-spacing: var(--label-tracking);
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .badge-sage {
+      background: var(--sage-tint);
+      color: var(--tertiary);
+      border: 1px solid var(--sage-border);
+    }
+
+    .badge-cyan {
+      background: var(--cyan-tint);
+      color: var(--primary);
+      border: 1px solid var(--cyan-border);
+    }
+
+    .badge-amber {
+      background: var(--amber-tint);
+      color: var(--data-3);
+      border: 1px solid var(--amber-border);
+    }
+
+    .badge-coral {
+      background: var(--coral-tint);
+      color: var(--data-4);
+      border: 1px solid var(--coral-border);
+    }
+
+    .pulse-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: var(--rounded-full);
+      background: currentColor;
+      box-shadow: 0 0 10px currentColor;
+      animation: soft-pulse 2.4s var(--ease-in-out) infinite;
+    }
+
+    @keyframes soft-pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.45; transform: scale(0.82); }
+    }
+
+    /* Hero AAA Card */
+    .rating-stage {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      align-items: center;
+      gap: var(--space-lg);
+    }
+
+    .rating-ring-wrap {
+      position: relative;
+      width: 176px;
+      height: 176px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .rating-ring-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+      filter: drop-shadow(0 0 14px color-mix(in srgb, var(--primary) 35%, transparent));
+    }
+
+    .rating-ring-track {
+      fill: none;
+      stroke: var(--outline-variant);
+      stroke-width: 10;
+    }
+
+    .rating-ring-arc {
+      fill: none;
+      stroke: var(--primary);
+      stroke-width: 10;
+      stroke-linecap: round;
+      stroke-dasharray: 440;
+      stroke-dashoffset: 440;
+      transition: stroke-dashoffset 1.2s var(--ease-out);
+    }
+
+    .rating-ring-arc.is-ready {
+      stroke-dashoffset: 18;
+    }
+
+    .rating-center {
+      text-align: center;
+      z-index: 1;
+    }
+
+    .rating-grade {
+      font-family: var(--font-headline);
+      font-size: var(--rating-size);
+      font-weight: 700;
+      letter-spacing: var(--heading-tracking);
+      line-height: 0.95;
+      color: var(--on-surface);
+      text-shadow: 0 0 28px color-mix(in srgb, var(--primary) 35%, transparent);
+    }
+
+    .rating-scale-note {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--primary);
+      letter-spacing: var(--label-tracking);
+      text-transform: uppercase;
+      margin-top: var(--space-xs);
+    }
+
+    .rating-summary {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .outlook-banner {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      align-self: flex-start;
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--rounded);
+      background: var(--sage-tint);
+      border: 1px solid var(--sage-border);
+      box-shadow: var(--glow-sage);
+      font-family: var(--font-headline);
+      font-size: var(--headline-size);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--tertiary);
+    }
+
+    .pillar-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+
+    .pillar-chip {
+      padding: var(--space-xs) var(--space-sm);
+      border-radius: var(--rounded);
+      background: var(--background);
+      border: var(--hairline);
+      font-family: var(--font-body);
+      font-size: var(--body-size);
+      font-weight: 600;
+      color: var(--on-surface);
+    }
+
+    /* Large KPI Typography */
+    .kpi-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: var(--space-md);
+      flex-wrap: wrap;
+    }
+
+    .kpi-value {
+      font-family: var(--font-headline);
+      font-size: var(--kpi-size);
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: var(--heading-tracking);
+      line-height: 1;
+      color: var(--on-surface);
+    }
+
+    .kpi-glow-cyan {
+      text-shadow: 0 0 26px color-mix(in srgb, var(--primary) 30%, transparent);
+    }
+
+    .kpi-glow-sage {
+      text-shadow: 0 0 26px color-mix(in srgb, var(--tertiary) 28%, transparent);
+    }
+
+    .kpi-glow-amber {
+      color: var(--data-3);
+      text-shadow: 0 0 24px color-mix(in srgb, var(--data-3) 26%, transparent);
+    }
+
+    .kpi-subline {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--tertiary);
+      letter-spacing: var(--label-tracking);
+      text-transform: uppercase;
+      margin: 0;
+    }
+
+    /* Debt Coverage Arc Gauge */
+    .coverage-gauge-box {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      align-items: center;
+      gap: var(--space-md);
+      padding: var(--space-md);
+      border-radius: var(--rounded);
+      background: var(--background);
+      border: var(--hairline);
+    }
+
+    .arc-gauge-wrap {
+      position: relative;
+      width: 144px;
+      height: 82px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .arc-gauge-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    .arc-track {
+      fill: none;
+      stroke: var(--outline-variant);
+      stroke-width: 12;
+      stroke-linecap: round;
+    }
+
+    .arc-baseline {
+      fill: none;
+      stroke: var(--data-context);
+      stroke-width: 12;
+      stroke-linecap: round;
+      stroke-dasharray: 188;
+      stroke-dashoffset: 119;
+    }
+
+    .arc-fill {
+      fill: none;
+      stroke: var(--tertiary);
+      stroke-width: 12;
+      stroke-linecap: round;
+      stroke-dasharray: 188;
+      stroke-dashoffset: 188;
+      filter: drop-shadow(0 0 8px color-mix(in srgb, var(--tertiary) 45%, transparent));
+      transition: stroke-dashoffset 1.2s var(--ease-out);
+    }
+
+    .arc-fill.is-ready {
+      stroke-dashoffset: 38;
+    }
+
+    .arc-center-val {
+      font-family: var(--font-headline);
+      font-size: var(--headline-size);
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      color: var(--tertiary);
+      line-height: 1;
+      z-index: 1;
+    }
+
+    .gauge-meta {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .gauge-meta-title {
+      font-family: var(--font-headline);
+      font-size: var(--subhead-size);
+      font-weight: 600;
+      color: var(--on-surface);
+    }
+
+    .gauge-meta-detail {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--on-surface-variant);
+    }
+
+    /* 10-Year Fiscal Surplus Track */
+    .surplus-block {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      padding: var(--space-md);
+      border-radius: var(--rounded);
+      background: var(--background);
+      border: var(--hairline);
+    }
+
+    .surplus-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+    }
+
+    .surplus-bars {
+      display: grid;
+      grid-template-columns: repeat(10, minmax(0, 1fr));
+      gap: var(--space-xs);
+      align-items: end;
+      height: 54px;
+      padding-top: var(--space-xs);
+    }
+
+    .yr-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      gap: var(--space-xs);
+      height: 100%;
+    }
+
+    .yr-bar {
+      width: 100%;
+      border-radius: 3px 3px 2px 2px;
+      background: var(--tertiary);
+      box-shadow: 0 0 10px color-mix(in srgb, var(--tertiary) 28%, transparent);
+      transition: transform var(--dur-micro) var(--ease-out), opacity var(--dur-short) var(--ease-out);
+    }
+
+    .yr-bar.is-deficit {
+      background: var(--data-4);
+      box-shadow: none;
+      opacity: 0.85;
+    }
+
+    .yr-lbl {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--on-surface-variant);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Benchmark Bars (Resource Powerhouse) */
+    .benchmark-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .bench-item {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .bench-top {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: var(--space-md);
+    }
+
+    .bench-name {
+      font-family: var(--font-headline);
+      font-size: var(--subhead-size);
+      font-weight: 600;
+      color: var(--on-surface);
+    }
+
+    .bench-detail {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--on-surface-variant);
+      margin-left: var(--space-xs);
+    }
+
+    .bench-num {
+      font-family: var(--font-headline);
+      font-size: var(--headline-size);
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      color: var(--primary);
+      white-space: nowrap;
+    }
+
+    .bench-num.is-sage { color: var(--tertiary); }
+    .bench-num.is-amber { color: var(--data-3); }
+    .bench-num.is-muted { color: var(--on-surface-variant); }
+
+    .bench-track {
+      height: 14px;
+      border-radius: var(--rounded-full);
+      background: var(--background);
+      border: var(--hairline);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .bench-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: var(--rounded-full);
+      background: var(--primary);
+      box-shadow: 0 0 14px color-mix(in srgb, var(--primary) 45%, transparent);
+      transition: width 1.1s var(--ease-out);
+    }
+
+    .bench-fill.is-sage {
+      background: var(--tertiary);
+      box-shadow: 0 0 14px color-mix(in srgb, var(--tertiary) 45%, transparent);
+    }
+
+    .bench-fill.is-amber {
+      background: var(--data-3);
+      box-shadow: 0 0 14px color-mix(in srgb, var(--data-3) 40%, transparent);
+    }
+
+    .bench-fill.is-context {
+      background: var(--secondary);
+      box-shadow: none;
+    }
+
+    .tax-expansion-note {
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--rounded);
+      background: var(--background);
+      border: var(--hairline);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+    }
+
+    /* MA63 Panel */
+    .ma63-step-box {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      padding: var(--space-md);
+      border-radius: var(--rounded);
+      background: var(--background);
+      border: var(--hairline);
+    }
+
+    .step-bar-row {
+      display: grid;
+      grid-template-columns: 74px minmax(0, 1fr) auto;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .step-track {
+      height: 12px;
+      border-radius: var(--rounded-full);
+      background: var(--surface-container-high);
+      overflow: hidden;
+    }
+
+    .step-fill-25 {
+      height: 100%;
+      width: 40%;
+      background: var(--data-context);
+      border-radius: var(--rounded-full);
+    }
+
+    .step-fill-26 {
+      height: 100%;
+      width: 0%;
+      background: var(--primary);
+      box-shadow: 0 0 12px color-mix(in srgb, var(--primary) 45%, transparent);
+      border-radius: var(--rounded-full);
+      transition: width 1.1s var(--ease-out);
+    }
+
+    .mini-stat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-sm);
+    }
+
+    .mini-stat {
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--rounded);
+      background: var(--background);
+      border: var(--hairline);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .mini-stat-val {
+      font-family: var(--font-headline);
+      font-size: var(--headline-size);
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      color: var(--on-surface);
+      line-height: 1.1;
+    }
+
+    .mini-stat-lbl {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      letter-spacing: var(--label-tracking);
+      text-transform: uppercase;
+      color: var(--on-surface-variant);
+    }
+
+    /* Brent Benchmark & Scenario Matrix */
+    .brent-range-box {
+      padding: var(--space-md);
+      border-radius: var(--rounded);
+      background: var(--background);
+      border: var(--hairline);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .brent-scale {
+      position: relative;
+      height: 22px;
+      border-radius: var(--rounded-full);
+      background: var(--surface-container-high);
+      border: var(--hairline);
+      display: flex;
+      align-items: center;
+      padding: 0 4px;
+    }
+
+    .brent-band {
+      position: absolute;
+      left: 60%;
+      width: 24%;
+      height: 12px;
+      border-radius: var(--rounded-full);
+      background: var(--data-3);
+      box-shadow: 0 0 16px color-mix(in srgb, var(--data-3) 50%, transparent);
+      transition: left var(--dur-short) var(--ease-out), width var(--dur-short) var(--ease-out), background-color var(--dur-short) var(--ease-out);
+    }
+
+    .brent-marker-25 {
+      position: absolute;
+      left: 34%;
+      width: 4px;
+      height: 20px;
+      border-radius: 2px;
+      background: var(--on-surface-variant);
+    }
+
+    .brent-ticks {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--on-surface-variant);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .scenario-impact {
+      font-weight: 600;
+      color: var(--on-surface);
+    }
+
+    .risk-badge {
+      white-space: normal;
+    }
+
+    .scenario-card {
+      padding: var(--space-md);
+      border-radius: var(--rounded);
+      background: var(--surface-container-low);
+      border: var(--hairline);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .risk-row {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+      padding-top: var(--space-xs);
+      border-top: var(--hairline);
+    }
+
+    /* Bottom Executive Broadcast Strip */
+    .broadcast-strip {
+      background: var(--surface-container-low);
+      border: var(--hairline);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md) var(--space-lg);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-md);
+    }
+
+    .spotlight-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .source-footer {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      letter-spacing: var(--label-tracking);
+      text-transform: uppercase;
+      color: var(--on-surface-variant);
+    }
+
+    /* Container-level adaptations */
+    @container (max-width: 420px) {
+      .rating-stage {
+        grid-template-columns: 1fr;
+        justify-items: start;
+      }
+      .coverage-gauge-box {
+        grid-template-columns: 1fr;
+      }
+      .mini-stat-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Responsive TV -> Laptop -> Mobile */
+    @media (max-width: 1200px) {
+      .hero-grid {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      }
+      .panel-hero {
+        grid-column: 1 / -1;
+      }
+      .pillar-grid {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      }
+      .panel-brent {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .tv-shell {
+        padding: var(--space-md);
+      }
+      .hero-grid,
+      .pillar-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .panel-hero,
+      .panel-brent {
+        grid-column: auto;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .tv-shell {
+        padding: var(--space-sm);
+        gap: var(--space-md);
+      }
+      .panel {
+        padding: var(--space-md);
+      }
+      .step-bar-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
 </head>
 <body>
-<div id="stage"></div><div id="status"></div>
-<script>
-const slides=["slide-1.jpg","slide-2.jpg","slide-3.jpg","slide-4.jpg","slide-5.jpg","slide-6.jpg"];
-const stage=document.getElementById('stage'),status=document.getElementById('status');
-let index=0;
-slides.forEach((src,i)=>{const img=new Image();img.src=src;img.alt='Slide '+(i+1);img.className=i===0?'active':'';stage.appendChild(img)});
-const show=()=>{const imgs=[...stage.children];imgs.forEach((img,i)=>img.classList.toggle('active',i===index));status.textContent=(index+1)+' / '+slides.length};
-show();
-setInterval(()=>{index=(index+1)%slides.length;show()},8000);
-</script>
-</body></html>
+  <main class="tv-shell">
+    <!-- Top Executive Control Room Header -->
+    <header class="control-bar">
+      <div class="title-block">
+        <h1 class="page-title">Sabah Sub-Sovereign Credit Rating</h1>
+        <p class="page-subtitle">GCEO Executive Control Display · MARC Ratings AAA Affirmation (Unsolicited)</p>
+      </div>
+
+      <div class="control-cluster" role="toolbar" aria-label="Executive Display Controls">
+        <div class="well-group" role="group" aria-label="Brent & Fiscal Scenario">
+          <button type="button" class="ctrl-btn" id="btn-scen-2025" onclick="setScenario('actual2025')" aria-pressed="false">2025 Actual</button>
+          <button type="button" class="ctrl-btn" id="btn-scen-base" onclick="setScenario('base2026')" aria-pressed="true">2026 Base Case</button>
+          <button type="button" class="ctrl-btn stress-btn" id="btn-scen-stress" onclick="setScenario('stress')" aria-pressed="false">Downcycle Stress</button>
+        </div>
+
+        <button type="button" class="ctrl-btn" id="btn-autocycle" onclick="toggleAutoCycle()" aria-pressed="false">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+          <span id="autocycle-label">TV Auto-Cycle: Off</span>
+        </button>
+
+        <div class="clock-readout" aria-label="Display Reference Time">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          <span id="live-clock">--:--:-- MYT</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Row 1: Hero Credit Rating + Liquidity Buffer + Fiscal Surplus -->
+    <section class="hero-grid" aria-label="Headline Sovereign Credit & Fiscal Indicators">
+      <!-- Panel 1: Credit Rating AAA + STABLE -->
+      <article class="panel panel-hero" id="panel-rating" data-pillar="rating">
+        <div class="panel-head">
+          <p class="data-label">Sub-Sovereign Credit Standing</p>
+          <span class="status-badge badge-cyan">
+            <span class="pulse-indicator" aria-hidden="true"></span>
+            Highest State Grade
+          </span>
+        </div>
+
+        <div class="rating-stage">
+          <div class="rating-ring-wrap" aria-label="AAA Credit Rating Gauge">
+            <svg class="rating-ring-svg" viewBox="0 0 160 160" aria-hidden="true">
+              <circle class="rating-ring-track" cx="80" cy="80" r="70"></circle>
+              <circle class="rating-ring-arc" id="rating-arc" cx="80" cy="80" r="70"></circle>
+            </svg>
+            <div class="rating-center">
+              <div class="rating-grade">AAA</div>
+              <div class="rating-scale-note">MARC Scale</div>
+            </div>
+          </div>
+
+          <div class="rating-summary">
+            <div class="outlook-banner" role="status">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                <polyline points="9 12 11 14 15 10"></polyline>
+              </svg>
+              <span>STABLE OUTLOOK</span>
+            </div>
+
+            <div class="pillar-chips">
+              <span class="pillar-chip">Natural Resource Wealth</span>
+              <span class="pillar-chip">2.4× Debt Cover Reserves</span>
+              <span class="pillar-chip">MA63 Political Leverage</span>
+            </div>
+          </div>
+        </div>
+
+        <p class="data-label">Affirmed on public data · Medium-term credit standing supported by liquidity &amp; federal alignment</p>
+      </article>
+
+      <!-- Panel 2: RM7.6bn Consolidated Funds -->
+      <article class="panel" id="panel-funds" data-pillar="fiscal">
+        <div class="panel-head">
+          <p class="data-label">Consolidated Funds (2024)</p>
+          <span class="status-badge badge-sage">2nd Largest in Malaysia</span>
+        </div>
+
+        <div class="kpi-row">
+          <div class="kpi-value kpi-glow-sage" data-counter="7.6" data-prefix="RM" data-suffix="bn" data-decimals="1">RM7.6bn</div>
+          <p class="kpi-subline">After Sarawak</p>
+        </div>
+
+        <div class="coverage-gauge-box">
+          <div class="arc-gauge-wrap" aria-label="2.4 times gross debt coverage gauge">
+            <svg class="arc-gauge-svg" viewBox="0 0 144 82" aria-hidden="true">
+              <path class="arc-track" d="M 12 72 A 60 60 0 0 1 132 72"></path>
+              <path class="arc-baseline" d="M 12 72 A 60 60 0 0 1 132 72"></path>
+              <path class="arc-fill" id="debt-arc" d="M 12 72 A 60 60 0 0 1 132 72"></path>
+            </svg>
+            <div class="arc-center-val" data-counter="2.4" data-prefix="" data-suffix="×" data-decimals="1">2.4×</div>
+          </div>
+
+          <div class="gauge-meta">
+            <div class="gauge-meta-title">Gross Debt Coverage</div>
+            <div class="gauge-meta-detail">Up from <strong>1.1×</strong> in 2020 (+118% buffer expansion)</div>
+            <div class="gauge-meta-detail">Sustained liquidity shield against oil cycles</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Panel 3: RM6.8bn State Revenue -->
+      <article class="panel" id="panel-revenue" data-pillar="fiscal">
+        <div class="panel-head">
+          <p class="data-label">State Revenue (2024)</p>
+          <span class="status-badge badge-cyan">6.0% of State GDP</span>
+        </div>
+
+        <div class="kpi-row">
+          <div class="kpi-value kpi-glow-cyan" data-counter="6.8" data-prefix="RM" data-suffix="bn" data-decimals="1">RM6.8bn</div>
+          <p class="kpi-subline">2nd Highest Nationally</p>
+        </div>
+
+        <div class="surplus-block">
+          <div class="surplus-head">
+            <span class="data-label">10-Year Fiscal Balance</span>
+            <span class="status-badge badge-sage">Surplus 9 / 10 Years</span>
+          </div>
+          <div class="surplus-bars" aria-label="Ten year fiscal balance showing nine surplus years and 2020 pandemic dip">
+            <div class="yr-col"><div class="yr-bar" style="height: 68%;"></div><span class="yr-lbl">15</span></div>
+            <div class="yr-col"><div class="yr-bar" style="height: 74%;"></div><span class="yr-lbl">16</span></div>
+            <div class="yr-col"><div class="yr-bar" style="height: 78%;"></div><span class="yr-lbl">17</span></div>
+            <div class="yr-col"><div class="yr-bar" style="height: 70%;"></div><span class="yr-lbl">18</span></div>
+            <div class="yr-col"><div class="yr-bar" style="height: 66%;"></div><span class="yr-lbl">19</span></div>
+            <div class="yr-col"><div class="yr-bar is-deficit" style="height: 36%;"></div><span class="yr-lbl">20</span></div>
+            <div class="yr-col"><div class="yr-bar" style="height: 76%;"></div><span class="yr-lbl">21</span></div>
+            <div class="yr-col"><div class="yr-bar" style="height: 88%;"></div><span class="yr-lbl">22</span></div>
+            <div class="yr-col"><div class="yr-bar" style="height: 92%;"></div><span class="yr-lbl">23</span></div>
+            <div class="yr-col"><div class="yr-bar" style="height: 58%;"></div><span class="yr-lbl">24</span></div>
+          </div>
+          <p class="data-label">2024 Surplus: 0.4% GDP (2023: 1.0%) · &gt;2/3 revenue from commodities</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- Row 2: Resource Powerhouse + MA63 Special Grant + Brent & Outlook -->
+    <section class="pillar-grid" aria-label="Economic Engines, MA63 Autonomy and Brent Outlook">
+      <!-- Panel 4: Resource Powerhouse Benchmarks -->
+      <article class="panel" id="panel-resources" data-pillar="resources">
+        <div class="panel-head">
+          <p class="data-label">Resource Powerhouse Benchmarks (2025)</p>
+          <span class="status-badge badge-cyan">#1 Primary Sector Share</span>
+        </div>
+
+        <div class="benchmark-list">
+          <div class="bench-item">
+            <div class="bench-top">
+              <div>
+                <span class="bench-name">National Crude Oil Output</span>
+                <span class="bench-detail">Close to 40% share</span>
+              </div>
+              <span class="bench-num" data-counter="40" data-prefix="~" data-suffix="%" data-decimals="0">~40%</span>
+            </div>
+            <div class="bench-track" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" aria-label="National Crude Oil Output Share 40 percent">
+              <div class="bench-fill" data-width="40%"></div>
+            </div>
+          </div>
+
+          <div class="bench-item">
+            <div class="bench-top">
+              <div>
+                <span class="bench-name">National Crude Palm Oil (CPO)</span>
+                <span class="bench-detail">4.4m tonnes · #2 in Malaysia</span>
+              </div>
+              <span class="bench-num is-sage" data-counter="22" data-prefix="" data-suffix="%" data-decimals="0">22%</span>
+            </div>
+            <div class="bench-track" role="progressbar" aria-valuenow="22" aria-valuemin="0" aria-valuemax="100" aria-label="National Crude Palm Oil Share 22 percent">
+              <div class="bench-fill is-sage" data-width="22%"></div>
+            </div>
+          </div>
+
+          <div class="bench-item">
+            <div class="bench-top">
+              <div>
+                <span class="bench-name">Agriculture &amp; Mining GDP Share</span>
+                <span class="bench-detail">Highest among all states</span>
+              </div>
+              <span class="bench-num is-amber" data-counter="35.9" data-prefix="" data-suffix="%" data-decimals="1">35.9%</span>
+            </div>
+            <div class="bench-track" role="progressbar" aria-valuenow="36" aria-valuemin="0" aria-valuemax="100" aria-label="Agriculture and Mining GDP Share 35.9 percent">
+              <div class="bench-fill is-amber" data-width="35.9%"></div>
+            </div>
+          </div>
+
+          <div class="bench-item">
+            <div class="bench-top">
+              <div>
+                <span class="bench-name">Manufacturing Base (Downstream Target)</span>
+                <span class="bench-detail">SDC Blueprint 2.0 priority</span>
+              </div>
+              <span class="bench-num is-muted" data-counter="7.2" data-prefix="" data-suffix="%" data-decimals="1">7.2%</span>
+            </div>
+            <div class="bench-track" role="progressbar" aria-valuenow="7" aria-valuemin="0" aria-valuemax="100" aria-label="Manufacturing Base GDP Share 7.2 percent">
+              <div class="bench-fill is-context" data-width="7.2%"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tax-expansion-note">
+          <span class="data-label">Sales Tax Broadened</span>
+          <span class="status-badge badge-sage">Silica Sand · Oil Palm Biomass · Gold · Silver</span>
+        </div>
+      </article>
+
+      <!-- Panel 5: MA63 Special Grant & Institutional Autonomy -->
+      <article class="panel" id="panel-ma63" data-pillar="ma63">
+        <div class="panel-head">
+          <p class="data-label">MA63 Fiscal &amp; Political Leverage</p>
+          <span class="status-badge badge-sage">+150% Grant Increase</span>
+        </div>
+
+        <div class="kpi-row">
+          <div class="kpi-value kpi-glow-cyan" data-counter="1.5" data-prefix="RM" data-suffix="bn" data-decimals="1">RM1.5bn</div>
+          <p class="kpi-subline">2026 Interim Special Grant</p>
+        </div>
+
+        <div class="ma63-step-box">
+          <div class="step-bar-row">
+            <span class="data-label">2025</span>
+            <div class="step-track" aria-hidden="true"><div class="step-fill-25"></div></div>
+            <span class="data-label">RM600m</span>
+          </div>
+          <div class="step-bar-row">
+            <span class="data-label">2026</span>
+            <div class="step-track" aria-hidden="true"><div class="step-fill-26" id="ma63-bar-26"></div></div>
+            <span class="status-badge badge-cyan">RM1.5bn</span>
+          </div>
+        </div>
+
+        <div class="mini-stat-grid">
+          <div class="mini-stat">
+            <div class="mini-stat-val">25 / 222</div>
+            <div class="mini-stat-lbl">MP Seats (#3 Bloc)</div>
+          </div>
+          <div class="mini-stat">
+            <div class="mini-stat-val">RM50m</div>
+            <div class="mini-stat-lbl">Federal Project Cap</div>
+          </div>
+          <div class="mini-stat">
+            <div class="mini-stat-val">40%</div>
+            <div class="mini-stat-lbl">Net Rev. Talks Active</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Panel 6: Brent Benchmark & Scenario Sensitivity -->
+      <article class="panel panel-brent" id="panel-brent" data-pillar="brent">
+        <div class="panel-head">
+          <p class="data-label">Brent Crude Benchmark</p>
+          <span class="status-badge badge-amber" id="brent-badge">2026 MARC Forecast</span>
+        </div>
+
+        <div class="kpi-row">
+          <div class="kpi-value kpi-glow-amber" id="brent-kpi">USD 90–95</div>
+          <p class="kpi-subline" id="brent-unit">Per Barrel (2026E)</p>
+        </div>
+
+        <div class="brent-range-box">
+          <div class="surplus-head">
+            <span class="data-label">2025: USD 68/bbl</span>
+            <span class="data-label" id="brent-delta-lbl">+32% to +40% Recovery</span>
+          </div>
+          <div class="brent-scale" aria-label="Brent crude oil price range scale">
+            <div class="brent-marker-25" title="2025 Actual: USD 68/bbl"></div>
+            <div class="brent-band" id="brent-band"></div>
+          </div>
+          <div class="brent-ticks">
+            <span>USD 50</span>
+            <span>USD 68 (25)</span>
+            <span>USD 90–95</span>
+            <span>USD 110</span>
+          </div>
+        </div>
+
+        <div class="scenario-card" aria-live="polite">
+          <p class="data-label" id="scen-title">GCEO Readout · 2026 Base Case</p>
+          <div id="scen-impact" class="scenario-impact">
+            Energy royalties &amp; sales taxes strengthen; 2.4× liquidity cover and RM1.5bn grant anchor AAA stability.
+          </div>
+          <div class="risk-row">
+            <span class="data-label">Key Downside Risks</span>
+            <span class="status-badge badge-coral risk-badge">Prolonged Commodity Slump · Federal Alignment</span>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- Row 3: Bottom Executive Spotlight & Source Strip -->
+    <footer class="broadcast-strip">
+      <div class="spotlight-tabs" role="group" aria-label="Pillar Focus Filter">
+        <button type="button" class="ctrl-btn" id="spot-all" onclick="setSpotlight('all')" aria-pressed="true">All Pillars</button>
+        <button type="button" class="ctrl-btn" id="spot-rating" onclick="setSpotlight('rating')" aria-pressed="false">1 · AAA Standing</button>
+        <button type="button" class="ctrl-btn" id="spot-fiscal" onclick="setSpotlight('fiscal')" aria-pressed="false">2 · Fiscal &amp; Funds</button>
+        <button type="button" class="ctrl-btn" id="spot-resources" onclick="setSpotlight('resources')" aria-pressed="false">3 · Resource Engine</button>
+        <button type="button" class="ctrl-btn" id="spot-ma63" onclick="setSpotlight('ma63')" aria-pressed="false">4 · MA63 Autonomy</button>
+        <button type="button" class="ctrl-btn" id="spot-brent" onclick="setSpotlight('brent')" aria-pressed="false">5 · Brent &amp; Risks</button>
+      </div>
+
+      <div class="source-footer">
+        Source: MARC Ratings (Unsolicited, Public Info) · SDC Blueprint 2.0
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    const SCENARIOS = {
+      actual2025: {
+        btnId: `btn-scen-2025`,
+        badge: `2025 Realised Baseline`,
+        badgeClass: `status-badge badge-cyan`,
+        kpi: `USD 68`,
+        unit: `Per Barrel (2025 Actual)`,
+        delta: `Interim Grant: RM600m`,
+        bandLeft: `30%`,
+        bandWidth: `10%`,
+        bandColor: `var(--primary)`,
+        title: `GCEO Readout · 2025 Actual Baseline`,
+        impact: `Despite softer USD 68/bbl crude, RM7.6bn consolidated funds (2.4× debt) and 9/10 surplus years preserved AAA standing.`
+      },
+      base2026: {
+        btnId: `btn-scen-base`,
+        badge: `2026 MARC Forecast`,
+        badgeClass: `status-badge badge-amber`,
+        kpi: `USD 90–95`,
+        unit: `Per Barrel (2026E)`,
+        delta: `+32% to +40% Recovery`,
+        bandLeft: `60%`,
+        bandWidth: `24%`,
+        bandColor: `var(--data-3)`,
+        title: `GCEO Readout · 2026 Base Case`,
+        impact: `Energy royalties & sales taxes strengthen; 2.4× liquidity cover and RM1.5bn grant anchor AAA stability.`
+      },
+      stress: {
+        btnId: `btn-scen-stress`,
+        badge: `Downcycle Stress Watch`,
+        badgeClass: `status-badge badge-coral`,
+        kpi: `< USD 65`,
+        unit: `Sustained Downcycle Risk`,
+        delta: `>2/3 Revenue Exposed`,
+        bandLeft: `10%`,
+        bandWidth: `20%`,
+        bandColor: `var(--data-4)`,
+        title: `GCEO Readout · Commodity Downcycle Watch`,
+        impact: `Prolonged oil & CPO weakness pressures >2/3 commodity receipts; mitigated by RM7.6bn reserves & broadened sales taxes.`
+      }
+    };
+
+    const SPOTLIGHT_ORDER = [`all`, `rating`, `fiscal`, `resources`, `ma63`, `brent`];
+    let autoCycleTimer = null;
+    let autoCycleIndex = 1;
+
+    function updateClock() {
+      const el = document.getElementById(`live-clock`);
+      if (!el) return;
+      const now = new Date();
+      const hh = String(now.getHours()).padStart(2, `0`);
+      const mm = String(now.getMinutes()).padStart(2, `0`);
+      const ss = String(now.getSeconds()).padStart(2, `0`);
+      el.textContent = `${hh}:${mm}:${ss} LOCAL`;
+    }
+
+    function animateVisuals() {
+      const ratingArc = document.getElementById(`rating-arc`);
+      if (ratingArc) ratingArc.classList.add(`is-ready`);
+
+      const debtArc = document.getElementById(`debt-arc`);
+      if (debtArc) debtArc.classList.add(`is-ready`);
+
+      const ma63Bar = document.getElementById(`ma63-bar-26`);
+      if (ma63Bar) ma63Bar.style.width = `100%`;
+
+      const fills = document.querySelectorAll(`.bench-fill[data-width]`);
+      fills.forEach(function (bar) {
+        const target = bar.getAttribute(`data-width`);
+        if (target) bar.style.width = target;
+      });
+    }
+
+    function animateCounters() {
+      const reduced = window.matchMedia && window.matchMedia(`(prefers-reduced-motion: reduce)`).matches;
+      const counters = document.querySelectorAll(`[data-counter]`);
+      if (reduced) return;
+
+      const duration = 950;
+      const start = performance.now();
+
+      function step(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+
+        counters.forEach(function (el) {
+          const target = parseFloat(el.getAttribute(`data-counter`) || `0`);
+          const prefix = el.getAttribute(`data-prefix`) || ``;
+          const suffix = el.getAttribute(`data-suffix`) || ``;
+          const decimals = parseInt(el.getAttribute(`data-decimals`) || `0`, 10);
+          const current = (target * eased).toFixed(decimals);
+          el.textContent = `${prefix}${current}${suffix}`;
+        });
+
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        }
+      }
+
+      requestAnimationFrame(step);
+    }
+
+    function setScenario(key) {
+      const data = SCENARIOS[key];
+      if (!data) return;
+
+      Object.keys(SCENARIOS).forEach(function (k) {
+        const btn = document.getElementById(SCENARIOS[k].btnId);
+        if (btn) btn.setAttribute(`aria-pressed`, k === key ? `true` : `false`);
+      });
+
+      const badge = document.getElementById(`brent-badge`);
+      if (badge) {
+        badge.textContent = data.badge;
+        badge.className = data.badgeClass;
+      }
+
+      const kpi = document.getElementById(`brent-kpi`);
+      if (kpi) kpi.textContent = data.kpi;
+
+      const unit = document.getElementById(`brent-unit`);
+      if (unit) unit.textContent = data.unit;
+
+      const delta = document.getElementById(`brent-delta-lbl`);
+      if (delta) delta.textContent = data.delta;
+
+      const band = document.getElementById(`brent-band`);
+      if (band) {
+        band.style.left = data.bandLeft;
+        band.style.width = data.bandWidth;
+        band.style.backgroundColor = data.bandColor;
+      }
+
+      const title = document.getElementById(`scen-title`);
+      if (title) title.textContent = data.title;
+
+      const impact = document.getElementById(`scen-impact`);
+      if (impact) impact.textContent = data.impact;
+    }
+
+    function setSpotlight(pillar) {
+      SPOTLIGHT_ORDER.forEach(function (id) {
+        const tab = document.getElementById(`spot-${id}`);
+        if (tab) tab.setAttribute(`aria-pressed`, id === pillar ? `true` : `false`);
+      });
+
+      const panels = document.querySelectorAll(`.panel[data-pillar]`);
+      panels.forEach(function (panel) {
+        const p = panel.getAttribute(`data-pillar`);
+        if (pillar === `all`) {
+          panel.classList.remove(`is-dimmed`, `is-spotlight`);
+        } else if (p === pillar) {
+          panel.classList.remove(`is-dimmed`);
+          panel.classList.add(`is-spotlight`);
+        } else {
+          panel.classList.remove(`is-spotlight`);
+          panel.classList.add(`is-dimmed`);
+        }
+      });
+    }
+
+    function toggleAutoCycle() {
+      const btn = document.getElementById(`btn-autocycle`);
+      const lbl = document.getElementById(`autocycle-label`);
+      if (!btn || !lbl) return;
+
+      if (autoCycleTimer !== null) {
+        clearInterval(autoCycleTimer);
+        autoCycleTimer = null;
+        btn.setAttribute(`aria-pressed`, `false`);
+        lbl.textContent = `TV Auto-Cycle: Off`;
+        setSpotlight(`all`);
+        return;
+      }
+
+      btn.setAttribute(`aria-pressed`, `true`);
+      lbl.textContent = `TV Auto-Cycle: On`;
+      autoCycleIndex = 1;
+      setSpotlight(SPOTLIGHT_ORDER[autoCycleIndex]);
+
+      autoCycleTimer = setInterval(function () {
+        autoCycleIndex = (autoCycleIndex + 1) % SPOTLIGHT_ORDER.length;
+        setSpotlight(SPOTLIGHT_ORDER[autoCycleIndex]);
+      }, 4500);
+    }
+
+    document.addEventListener(`DOMContentLoaded`, function () {
+      updateClock();
+      setInterval(updateClock, 1000);
+      toggleAutoCycle();
+      requestAnimationFrame(function () {
+        animateVisuals();
+        animateCounters();
+      });
+    });
+  </script>
+</body>
+</html>
