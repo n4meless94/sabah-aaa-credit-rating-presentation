@@ -135,9 +135,14 @@
     }
   }
 
+  function formatPrayerTime(time) {
+    const hour = Number(time.slice(0, 2));
+    return pad(hour % 12 || 12) + ':' + time.slice(3, 5) + (hour < 12 ? ' AM' : ' PM');
+  }
+
   function setArrival(name, value, now) {
     arrivalUntil = now + 15000;
-    arrival.textContent = 'Masuk waktu ' + name + ' · ' + value.time.slice(0, 5) + ' · ' + config.location;
+    arrival.textContent = 'Masuk waktu ' + name + ' · ' + formatPrayerTime(value.time) + ' · ' + config.location;
     arrival.hidden = false;
     if (config.azanUrl) {
       const playback = new Audio(config.azanUrl).play();
@@ -159,7 +164,7 @@
     for (const entry of entries) {
       const value = today && today.times[entry.key];
       if (rollover || fromRefresh) {
-        entry.time.textContent = value ? value.time.slice(0, 5) : '—';
+        entry.time.textContent = value ? formatPrayerTime(value.time) : '—';
         if (value) entry.time.dateTime = value.time;
         else entry.time.removeAttribute('datetime');
       }
