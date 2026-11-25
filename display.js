@@ -34,7 +34,8 @@
     const now = Date.now();
     const parts = malaysiaParts(now);
     const clock = el('clock-time');
-    const time = parts.hour + ':' + parts.minute;
+    const hour = config.clock.hour12 && parts.hour === '00' ? '12' : parts.hour;
+    const time = hour + ':' + parts.minute;
     if (clock.textContent !== time) {
       clock.textContent = time;
       clock.dateTime = new Date(now).toISOString();

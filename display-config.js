@@ -5,7 +5,7 @@ window.TV_CONFIG = {
     disabledScenes: []
   },
   motion: 'auto', // auto, reduced, or static
-  clock: { hour12: false, showSeconds: true },
+  clock: { hour12: true, showSeconds: true },
   prayer: {
     zone: 'SBH07',
     location: 'Kota Kinabalu',
